@@ -20,4 +20,11 @@ public class RomanNumeralConverterTest {
 
         assertThat(decimalValue).isEqualTo(2007);
     }
+
+    @Test
+    public void convertsDefaultRomanNumberToDecimalNumberUsingSubstractionPrinciple() {
+        int decimalValue = romanNumeralConverter.convertToDecimal("MCMXLIV");
+
+        assertThat(decimalValue).isEqualTo(1944);
+    }
 }
