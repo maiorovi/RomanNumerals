@@ -5,6 +5,7 @@ import java.util.HashMap;
 public class RomanNumeralConverter {
 
     private HashMap<Character, Integer> mapping = new HashMap<Character, Integer>();
+    private RomanNumeralsValidator romanNumeralsValidator = new RomanNumeralsValidator();
 
     public RomanNumeralConverter() {
         buildMapping();
@@ -22,6 +23,8 @@ public class RomanNumeralConverter {
 
     public int convertToDecimal(String romanNumber) {
         int summary = 0;
+
+        romanNumeralsValidator.validate(romanNumber);
 
         for(int i = 0; i < romanNumber.length(); i++) {
             if (notLastCharacter(i, romanNumber.length() - 1) && shouldSubstract(romanNumber.charAt(i), romanNumber.charAt(i+1))) {

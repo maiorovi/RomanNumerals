@@ -45,4 +45,25 @@ public class RomanNumeralsValidatorTest {
 
         romanNumeralsValidator.validate(romanNumber);
     }
+
+    @Test(expected =  RuntimeException.class)
+    public void throwExceptionWhenDRepeated() {
+        String romanNumber = "MCMDD";
+
+        romanNumeralsValidator.validate(romanNumber);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void throwExceptionWhenLRepeated() {
+        String romanNumber = "MCMLL";
+
+        romanNumeralsValidator.validate(romanNumber);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void throwExceptionWhenVRepeated() {
+        String romanNumber = "MCMVV";
+
+        romanNumeralsValidator.validate(romanNumber);
+    }
 }
