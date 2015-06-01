@@ -1,58 +1,63 @@
 package logic;
 
+import java.util.ArrayList;
+
 public class RomanNumeralsValidator {
 
+    public static final int LIMIT_FOR_CHARS_I_X_C_M = 4;
+    public static final int LIMIT_FOR_CHARS_D_L_V = 2;
+    private ArrayList<Character> list = new ArrayList<>();
+
+    public RomanNumeralsValidator() {
+        constructList();
+    }
+
+    private void constructList() {
+        list.add('I');
+        list.add('X');
+        list.add('C');
+        list.add('M');
+        list.add('D');
+        list.add('L');
+        list.add('V');
+    }
+
     public void validate(String romanNumber) {
-        int iCounter = 0, xCounter = 0, cCounter = 0, mCounter = 0;
-        int dCounter = 0, lCounter = 0, vCounter = 0;
+        validateDuplicationInRomanNumeral(romanNumber);
+    }
+
+    private void validateDuplicationInRomanNumeral(String romanNumber) {
+        int counter = 0;
+        char lastCharacter = romanNumber.charAt(0);
 
         for (int i = 0; i < romanNumber.length(); i++) {
+            char currentChar = romanNumber.charAt(i);
 
-            if (romanNumber.charAt(i) == 'I') {
-                iCounter++;
-            } else {
-                iCounter = 0;
+            if (list.contains(currentChar)) {
+                if ( lastCharacter == currentChar ) {
+                    counter++;
+                } else  {
+                    counter = 1;
+                    lastCharacter = currentChar;
+                }
             }
 
-            if (romanNumber.charAt(i) == 'X') {
-                xCounter++;
-            } else {
-                xCounter = 0;
-            }
+            throwExceptionIfCounterOverLimitForChar(lastCharacter, counter);
+        }
+    }
 
-            if (romanNumber.charAt(i) == 'C') {
-                cCounter++;
-            } else {
-                cCounter = 0;
-            }
+    private boolean characterEqualIorXorCorM(char lastCharacter) {
+        return (lastCharacter == 'I' || lastCharacter == 'X' || lastCharacter == 'C' || lastCharacter == 'M');
+    }
 
-            if (romanNumber.charAt(i) == 'M') {
-                mCounter++;
-            } else {
-                mCounter = 0;
-            }
+    private boolean characterEqualDorLorV(char lastCharacter) {
+        return (lastCharacter == 'D' || lastCharacter == 'L' || lastCharacter == 'V');
+    }
 
-            if (romanNumber.charAt(i) == 'D') {
-                dCounter++;
-            } else  {
-                dCounter = 0;
-            }
-
-            if (romanNumber.charAt(i) == 'L') {
-                lCounter++;
-            } else  {
-                lCounter = 0;
-            }
-
-            if(romanNumber.charAt(i) == 'V') {
-                vCounter++;
-            } else  {
-                vCounter = 0;
-            }
-
-            if (iCounter == 4 || xCounter == 4 || cCounter == 4 || mCounter == 4 || dCounter == 2 || lCounter == 2 || vCounter == 2) {
-                throw new RuntimeException();
-            }
+    private void throwExceptionIfCounterOverLimitForChar(char lastCharacter, int counter) {
+        if( counter == LIMIT_FOR_CHARS_I_X_C_M && characterEqualIorXorCorM(lastCharacter)
+                || (counter == LIMIT_FOR_CHARS_D_L_V && characterEqualDorLorV(lastCharacter))) {
+            throw  new RuntimeException();
         }
     }
 }
