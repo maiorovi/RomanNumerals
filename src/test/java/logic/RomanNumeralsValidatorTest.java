@@ -83,8 +83,15 @@ public class RomanNumeralsValidatorTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void throwExceptioNwhenXSubtractedFromIncorrectCharacter() {
+    public void throwExceptionWhenXSubtractedFromIncorrectCharacter() {
         String romanNumber = "MCMXD";
+
+        romanNumeralsValidator.validate(romanNumber);
+    }
+
+    @Test(expected =  RuntimeException.class)
+    public void throwExceptionWhenCSubtractractedFromIncorrecteCharacter() {
+        String romanNumber = "MCL";
 
         romanNumeralsValidator.validate(romanNumber);
     }

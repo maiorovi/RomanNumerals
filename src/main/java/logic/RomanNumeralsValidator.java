@@ -27,8 +27,9 @@ public class RomanNumeralsValidator {
     public void validate(String romanNumber) {
         validateDuplicationInRomanNumeral(romanNumber);
         validateDuplicationForSubtraction(romanNumber);
-        validateSubstractionOfI(romanNumber);
-        validateSubstractionOfX(romanNumber);
+        validateSubtractionOfI(romanNumber);
+        validateSubtractionOfX(romanNumber);
+        validateSubtractionOfC(romanNumber);
     }
 
     private void validateDuplicationInRomanNumeral(String romanNumber) {
@@ -66,7 +67,7 @@ public class RomanNumeralsValidator {
         }
     }
 
-    private void validateSubstractionOfI(String romanNumber) {
+    private void validateSubtractionOfI(String romanNumber) {
         for (int i = 0; i <romanNumber.length(); i++) {
             if (isNextCharPresent(i, romanNumber.length()) && romanNumber.charAt(i) == 'I') {
                 if(romanNumber.charAt(i+1) != 'V' && romanNumber.charAt(i+1) != 'X')
@@ -75,10 +76,19 @@ public class RomanNumeralsValidator {
         }
     }
 
-    private void validateSubstractionOfX(String romanNumber) {
+    private void validateSubtractionOfX(String romanNumber) {
         for (int i = 0; i <romanNumber.length(); i++) {
             if (isNextCharPresent(i, romanNumber.length()) && romanNumber.charAt(i) == 'X') {
                 if(romanNumber.charAt(i+1) != 'C' && romanNumber.charAt(i+1) != 'L')
+                    throw new RuntimeException();
+            }
+        }
+    }
+
+    private void validateSubtractionOfC(String romanNumber) {
+        for (int i = 0; i <romanNumber.length(); i++) {
+            if (isNextCharPresent(i, romanNumber.length()) && romanNumber.charAt(i) == 'C') {
+                if(romanNumber.charAt(i+1) != 'D' && romanNumber.charAt(i+1) != 'M')
                     throw new RuntimeException();
             }
         }
