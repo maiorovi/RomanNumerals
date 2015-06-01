@@ -2,6 +2,7 @@ package logic;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.omg.SendingContext.RunTime;
 
 public class RomanNumeralsValidatorTest {
     private RomanNumeralsValidator romanNumeralsValidator;
@@ -70,6 +71,13 @@ public class RomanNumeralsValidatorTest {
     @Test(expected = RuntimeException.class)
     public void throwExceptionWhenNumeralRepeatedForSubtraction() {
         String romanNumber = "MCCMLI";
+
+        romanNumeralsValidator.validate(romanNumber);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void throwExceptionWhenISubtractedNotFromTheVorX() {
+        String romanNumber = "MCMXLIC";
 
         romanNumeralsValidator.validate(romanNumber);
     }

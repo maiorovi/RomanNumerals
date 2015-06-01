@@ -1,5 +1,7 @@
 package logic;
 
+import org.omg.SendingContext.RunTime;
+
 import java.util.ArrayList;
 
 public class RomanNumeralsValidator {
@@ -27,6 +29,7 @@ public class RomanNumeralsValidator {
     public void validate(String romanNumber) {
         validateDuplicationInRomanNumeral(romanNumber);
         validateDuplicationForSubtraction(romanNumber);
+        validateSubstractionOfI(romanNumber);
     }
 
     private void validateDuplicationInRomanNumeral(String romanNumber) {
@@ -50,14 +53,24 @@ public class RomanNumeralsValidator {
     }
 
     private void validateDuplicationForSubtraction(String romanNumber) {
-        for(int i = 0; i < romanNumber.length(); i++) {
+        for(int i = 1; i < romanNumber.length(); i++) {
             char currentChar = romanNumber.charAt(i);
-            if (isNextCharPresent(i, romanNumber.length())) {
+
+            if (isNextCharPresent(i, romanNumber.length()) ) {
                 int fValue = mapper.getDeciamlValueFrom(currentChar);
                 int sValue = mapper.getDeciamlValueFrom(romanNumber.charAt(i+1));
                 int prevVal = mapper.getDeciamlValueFrom(romanNumber.charAt(i-1));
 
                 if (sValue > fValue && prevVal <= fValue)
+                    throw new RuntimeException();
+            }
+        }
+    }
+
+    private void validateSubstractionOfI(String romanNumber) {
+        for (int i = 0; i <romanNumber.length(); i++) {
+            if (isNextCharPresent(i, romanNumber.length()) && romanNumber.charAt(i) == 'I') {
+                if(romanNumber.charAt(i+1) != 'V' && romanNumber.charAt(i+1) != 'X')
                     throw new RuntimeException();
             }
         }
