@@ -21,7 +21,7 @@ public class RomanNumeralsValidatorTest {
 
     @Test(expected = RuntimeException.class)
     public void throwExceptionWhenIRepeatedMoreThenThreeTimes() {
-        String romanNumber= "MCMXIIII";
+        String romanNumber = "MCMXIIII";
 
         romanNumeralsValidator.validate(romanNumber);
     }
@@ -33,21 +33,21 @@ public class RomanNumeralsValidatorTest {
         romanNumeralsValidator.validate(romanNumber);
     }
 
-    @Test(expected =  RuntimeException.class)
+    @Test(expected = RuntimeException.class)
     public void throwExceptionWhenCRepeatedMoreThenThreeTimes() {
         String romanNumber = "MCCCCMXI";
 
         romanNumeralsValidator.validate(romanNumber);
     }
 
-    @Test(expected =  RuntimeException.class)
+    @Test(expected = RuntimeException.class)
     public void throwExceptionWhenMRepeatedMoreThenThreeTimes() {
         String romanNumber = "MCMMMMXI";
 
         romanNumeralsValidator.validate(romanNumber);
     }
 
-    @Test(expected =  RuntimeException.class)
+    @Test(expected = RuntimeException.class)
     public void throwExceptionWhenDRepeated() {
         String romanNumber = "MCMDD";
 
@@ -78,6 +78,13 @@ public class RomanNumeralsValidatorTest {
     @Test(expected = RuntimeException.class)
     public void throwExceptionWhenISubtractedNotFromTheVorX() {
         String romanNumber = "MCMXLIC";
+
+        romanNumeralsValidator.validate(romanNumber);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void throwExceptioNwhenXSubtractedFromIncorrectCharacter() {
+        String romanNumber = "MCMXD";
 
         romanNumeralsValidator.validate(romanNumber);
     }

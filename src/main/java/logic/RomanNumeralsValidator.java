@@ -1,7 +1,5 @@
 package logic;
 
-import org.omg.SendingContext.RunTime;
-
 import java.util.ArrayList;
 
 public class RomanNumeralsValidator {
@@ -30,6 +28,7 @@ public class RomanNumeralsValidator {
         validateDuplicationInRomanNumeral(romanNumber);
         validateDuplicationForSubtraction(romanNumber);
         validateSubstractionOfI(romanNumber);
+        validateSubstractionOfX(romanNumber);
     }
 
     private void validateDuplicationInRomanNumeral(String romanNumber) {
@@ -71,6 +70,15 @@ public class RomanNumeralsValidator {
         for (int i = 0; i <romanNumber.length(); i++) {
             if (isNextCharPresent(i, romanNumber.length()) && romanNumber.charAt(i) == 'I') {
                 if(romanNumber.charAt(i+1) != 'V' && romanNumber.charAt(i+1) != 'X')
+                    throw new RuntimeException();
+            }
+        }
+    }
+
+    private void validateSubstractionOfX(String romanNumber) {
+        for (int i = 0; i <romanNumber.length(); i++) {
+            if (isNextCharPresent(i, romanNumber.length()) && romanNumber.charAt(i) == 'X') {
+                if(romanNumber.charAt(i+1) != 'C' && romanNumber.charAt(i+1) != 'L')
                     throw new RuntimeException();
             }
         }
