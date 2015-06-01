@@ -95,4 +95,25 @@ public class RomanNumeralsValidatorTest {
 
         romanNumeralsValidator.validate(romanNumber);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void throwExceptioWhenAttemptedToSubtractV() {
+        String romanNumber = "MVL";
+
+        romanNumeralsValidator.validate(romanNumber);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void throwExceptionWhenAttemptedToSubtractL() {
+        String romanNumber = "MLM";
+
+        romanNumeralsValidator.validate(romanNumber);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void throwExceptionWhenAttemptedToSubtractD() {
+        String romanNumber = "MDM";
+
+        romanNumeralsValidator.validate(romanNumber);
+    }
 }
