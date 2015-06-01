@@ -6,7 +6,9 @@ public class RomanNumeralsValidator {
 
     public static final int LIMIT_FOR_CHARS_I_X_C_M = 4;
     public static final int LIMIT_FOR_CHARS_D_L_V = 2;
+
     private ArrayList<Character> list = new ArrayList<>();
+    private RomanNumeralsMapper mapper = new RomanNumeralsMapper();
 
     public RomanNumeralsValidator() {
         constructList();
@@ -24,6 +26,7 @@ public class RomanNumeralsValidator {
 
     public void validate(String romanNumber) {
         validateDuplicationInRomanNumeral(romanNumber);
+        validateDuplicationForSubtraction(romanNumber);
     }
 
     private void validateDuplicationInRomanNumeral(String romanNumber) {
@@ -44,6 +47,24 @@ public class RomanNumeralsValidator {
 
             throwExceptionIfCounterOverLimitForChar(lastCharacter, counter);
         }
+    }
+
+    private void validateDuplicationForSubtraction(String romanNumber) {
+        for(int i = 0; i < romanNumber.length(); i++) {
+            char currentChar = romanNumber.charAt(i);
+            if (isNextCharPresent(i, romanNumber.length())) {
+                int fValue = mapper.getDeciamlValueFrom(currentChar);
+                int sValue = mapper.getDeciamlValueFrom(romanNumber.charAt(i+1));
+                int prevVal = mapper.getDeciamlValueFrom(romanNumber.charAt(i-1));
+
+                if (sValue > fValue && prevVal <= fValue)
+                    throw new RuntimeException();
+            }
+        }
+    }
+    
+    private boolean isNextCharPresent(int currentPosition, int strLength) {
+        return strLength - 1  > currentPosition;
     }
 
     private boolean characterEqualIorXorCorM(char lastCharacter) {

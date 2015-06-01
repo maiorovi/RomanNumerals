@@ -67,10 +67,10 @@ public class RomanNumeralsValidatorTest {
         romanNumeralsValidator.validate(romanNumber);
     }
 
-//    @Test(expected = RuntimeException.class)
-//    public void throwExceptionWhenNumeralRepeatedForSubtraction() {
-//        String romanNumber = "MCCMLI";
-//
-//        romanNumeralsValidator.validate(romanNumber);
-//    }
+    @Test(expected = RuntimeException.class)
+    public void throwExceptionWhenNumeralRepeatedForSubtraction() {
+        String romanNumber = "MCCMLI";
+
+        romanNumeralsValidator.validate(romanNumber);
+    }
 }
