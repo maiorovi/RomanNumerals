@@ -1,25 +1,9 @@
 package logic;
 
-import java.util.HashMap;
-
 public class RomanNumeralConverter {
 
-    private HashMap<Character, Integer> mapping = new HashMap<Character, Integer>();
     private RomanNumeralsValidator romanNumeralsValidator = new RomanNumeralsValidator();
-
-    public RomanNumeralConverter() {
-        buildMapping();
-    }
-
-    private void buildMapping() {
-        mapping.put('I', 1);
-        mapping.put('V', 5);
-        mapping.put('X', 10);
-        mapping.put('L', 50);
-        mapping.put('C', 100);
-        mapping.put('D', 500);
-        mapping.put('M', 1000);
-    }
+    private RomanNumeralsMapper mapper = new RomanNumeralsMapper();
 
     public int convertToDecimal(String romanNumber) {
         int summary = 0;
@@ -33,14 +17,14 @@ public class RomanNumeralConverter {
             }
 
             char romanDigit = romanNumber.charAt(i);
-            summary += mapping.get(romanDigit);
+            summary += mapper.getDeciamlValueFrom(romanDigit);
         }
         
         return summary;
     }
 
     private boolean shouldSubstract(char current, char next) {
-        return mapping.get(next) > mapping.get(current);
+        return mapper.getDeciamlValueFrom(next) > mapper.getDeciamlValueFrom(current);
     }
 
     private boolean notLastCharacter(int currentPosition, int maxPosition) {
@@ -48,8 +32,8 @@ public class RomanNumeralConverter {
     }
 
     private int doSubtract(String romanNumeral, int currentPosition) {
-        int smaller = mapping.get(romanNumeral.charAt(currentPosition));
-        int higher = mapping.get(romanNumeral.charAt(currentPosition + 1));
+        int smaller = mapper.getDeciamlValueFrom(romanNumeral.charAt(currentPosition));
+        int higher = mapper.getDeciamlValueFrom(romanNumeral.charAt(currentPosition + 1));
 
         return higher - smaller;
     }
